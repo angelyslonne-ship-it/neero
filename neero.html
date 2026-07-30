@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>L'Astor · Hôtel de Luxe Boutique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f6f8;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background: rgba(26, 42, 74, 0.97);
+            backdrop-filter: blur(6px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(201, 169, 110, 0.3);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        .logo span {
+            color: #c9a96e;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #e8e8f0;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active-link {
+            color: #c9a96e;
+            border-bottom-color: #c9a96e;
+        }
+        .nav-cta {
+            background: #c9a96e;
+            color: #1a2a4a !important;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            border-bottom: none !important;
+        }
+        .nav-cta:hover {
+            background: #b8975a;
+            color: #ffffff !important;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background: #c9a96e;
+            color: #1a2a4a;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.25s;
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background: #b8975a;
+            transform: scale(1.02);
+            color: #ffffff;
+        }
+        .btn-outline {
+            border: 2px solid #c9a96e;
+            background: transparent;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 8px;
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            color: #1a2a4a;
+        }
+        .btn-outline:hover {
+            background: #c9a96e;
+            color: #1a2a4a;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a2a4a;
+        }
+        .section-sub {
+            color: #6a7a8a;
+            font-size: 1.05rem;
+            margin-bottom: 48px;
+        }
+
+        /* ============================================================
+                   PAGE: ACCUEIL
+                   ============================================================ */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 82vh;
+            align-items: center;
+            gap: 48px;
+            padding: 40px 40px 60px;
+            background: linear-gradient(135deg, #f5f6f8 0%, #e8ecf2 100%);
+        }
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            line-height: 1.1;
+            font-weight: 600;
+            letter-spacing: -1px;
+            color: #1a2a4a;
+        }
+        .hero-text h1 i {
+            font-style: italic;
+            color: #c9a96e;
+            font-weight: 400;
+        }
+        .hero-text p {
+            font-size: 1.15rem;
+            color: #4a5a6a;
+            margin: 24px 0 32px;
+            max-width: 480px;
+            line-height: 1.8;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 16px;
+        }
+        .hero-stats .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #c9a96e;
+        }
+        .hero-stats .label {
+            font-size: 0.85rem;
+            color: #6a7a8a;
+            letter-spacing: 0.5px;
+        }
+        .hero-image {
+            background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1400&q=80') center/cover no-repeat;
+            border-radius: 24px;
+            min-height: 480px;
+            box-shadow: 0 30px 60px rgba(26, 42, 74, 0.15);
+            position: relative;
+        }
+        .hero-image .badge {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(26, 42, 74, 0.92);
+            backdrop-filter: blur(4px);
+            padding: 16px 24px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        .badge .stars {
+            color: #c9a96e;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        .badge .text {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+        .badge .text small {
+            font-weight: 400;
+            color: #aab8c8;
+            display: block;
+            font-size: 0.75rem;
+        }
+
+        /* Booking Bar */
+        .booking-bar {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 32px;
+            margin-top: -40px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 50px rgba(26, 42, 74, 0.08);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 20px 32px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(201, 169, 110, 0.15);
+        }
+        .booking-bar .field {
+            flex: 1 0 140px;
+        }
+        .booking-bar label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #6a7a8a;
+            margin-bottom: 4px;
+        }
+        .booking-bar input,
+        .booking-bar select {
+            width: 100%;
+            padding: 10px 0 6px;
+            border: none;
+            border-bottom: 2px solid #dde4ec;
+            font-size: 1rem;
+            background: transparent;
+            outline: none;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            color: #1a2a4a;
+        }
+        .booking-bar input:focus,
+        .booking-bar select:focus {
+            border-color: #c9a96e;
+        }
+        .booking-bar .btn-book {
+            background: #1a2a4a;
+            color: #ffffff;
+            border: none;
+            padding: 14px 48px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.25s;
+            font-family: 'Inter', sans-serif;
+            flex: 0 0 auto;
+        }
+        .booking-bar .btn-book:hover {
+            background: #c9a96e;
+            color: #1a2a4a;
+            transform: scale(1.02);
+        }
+
+        /* ============================================================
+                   PAGE: CHAMBRES
+                   ============================================================ */
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin: 40px 0 80px;
+        }
+        .room-card {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(26, 42, 74, 0.06);
+            transition: 0.3s;
+            border: 1px solid rgba(201, 169, 110, 0.1);
+        }
+        .room-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 48px rgba(26, 42, 74, 0.10);
+            border-color: #c9a96e;
+        }
+        .room-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        .room-card .body {
+            padding: 28px;
+        }
+        .room-card .body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1a2a4a;
+        }
+        .room-card .body .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #c9a96e;
+            margin: 8px 0 4px;
+        }
+        .room-card .body .price small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #8a9aaa;
+        }
+        .room-card .body .features {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 14px 0;
+            font-size: 0.85rem;
+            color: #4a5a6a;
+        }
+        .room-card .body .features span {
+            background: #eef2f6;
+            padding: 4px 14px;
+            border-radius: 40px;
+        }
+
+        /* ============================================================
+                   PAGE: SERVICES
+                   ============================================================ */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin: 40px 0 80px;
+        }
+        .amenity-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(26, 42, 74, 0.04);
+            transition: 0.3s;
+            border: 1px solid rgba(201, 169, 110, 0.08);
+        }
+        .amenity-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(26, 42, 74, 0.10);
+            border-color: #c9a96e;
+        }
+        .amenity-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .amenity-card .body {
+            padding: 24px 28px 28px;
+        }
+        .amenity-card .body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1a2a4a;
+        }
+        .amenity-card .body p {
+            color: #5a6a7a;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+                   PAGE: GALERIE
+                   ============================================================ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 40px 0 80px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(26, 42, 74, 0.06);
+            border: 2px solid transparent;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 32px rgba(26, 42, 74, 0.12);
+            border-color: #c9a96e;
+        }
+
+        /* ============================================================
+                   PAGE: CONTACT
+                   ============================================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin: 40px 0 80px;
+        }
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            color: #1a2a4a;
+        }
+        .contact-info p {
+            margin-bottom: 8px;
+            color: #4a5a6a;
+        }
+        .contact-info .highlight {
+            color: #c9a96e;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .contact-info .detail {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 2px solid #c9a96e;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #dde4ec;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            background: #ffffff;
+            transition: 0.2s;
+            margin-bottom: 16px;
+            color: #1a2a4a;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #c9a96e;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1);
+        }
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .contact-image {
+            background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80') center/cover no-repeat;
+            border-radius: 24px;
+            min-height: 400px;
+            box-shadow: 0 20px 40px rgba(26, 42, 74, 0.08);
+            border: 2px solid rgba(201, 169, 110, 0.15);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            margin: 40px 0 80px;
+        }
+        .testimonial {
+            background: #ffffff;
+            padding: 32px 28px;
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(26, 42, 74, 0.04);
+            border-left: 6px solid #c9a96e;
+        }
+        .testimonial .stars {
+            color: #c9a96e;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+        }
+        .testimonial p {
+            font-style: italic;
+            margin: 16px 0;
+            color: #2a3a4a;
+            font-size: 1rem;
+        }
+        .testimonial .author {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1a2a4a;
+        }
+        .testimonial .author small {
+            font-weight: 400;
+            color: #8a9aaa;
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1a2a4a;
+            color: #b0c0d0;
+            padding: 60px 40px 30px;
+            border-radius: 32px 32px 0 0;
+            margin-top: 40px;
+            border-top: 3px solid #c9a96e;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .footer-grid h4 {
+            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+        }
+        .footer-grid p,
+        .footer-grid a {
+            color: #b0c0d0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .footer-grid a:hover {
+            color: #c9a96e;
+        }
+        .footer-grid input {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 60px;
+            border: 1px solid #2a4a6a;
+            background: #0a1a3a;
+            color: #ffffff;
+            min-width: 140px;
+        }
+        .footer-grid input::placeholder {
+            color: #6a8aaa;
+        }
+        .footer-grid button {
+            background: #c9a96e;
+            color: #1a2a4a;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .footer-grid button:hover {
+            background: #b8975a;
+            color: #ffffff;
+        }
+        .footer-bottom {
+            border-top: 1px solid #2a4a6a;
+            margin-top: 48px;
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6a8aaa;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .hero-image {
+                min-height: 300px;
+            }
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            nav {
+                padding: 16px 20px;
+            }
+            .nav-links {
+                gap: 14px;
+                font-size: 0.82rem;
+            }
+            .booking-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 20px;
+            }
+            .booking-bar .btn-book {
+                width: 100%;
+                text-align: center;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .contact-image {
+                min-height: 240px;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .amenities-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            .hero-stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+            .room-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    NAVIGATION
+    ============================================================ -->
+    <nav>
+        <div class="logo" onclick="showPage('accueil')">L'<span>Astor</span></div>
+        <div class="nav-links">
+            <a class="active-link" onclick="showPage('accueil')">Accueil</a>
+            <a onclick="showPage('chambres')">Chambres</a>
+            <a onclick="showPage('services')">Services</a>
+            <a onclick="showPage('galerie')">Galerie</a>
+            <a onclick="showPage('contact')">Contact</a>
+            <a onclick="showPage('contact')" class="nav-cta">Réserver</a>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    PAGE: ACCUEIL
+    ============================================================ -->
+    <div id="page-accueil" class="page active">
+
+        <!-- HERO -->
+        <section class="hero container">
+            <div class="hero-text">
+                <h1>Là où l'élégance <i>intemporelle</i> rencontre le confort <i>moderne</i></h1>
+                <p>Niché au cœur de la ville, L'Astor offre une escapade intimiste avec un service d'exception, un art soigneusement curaté et une excellence culinaire.</p>
+                <div class="hero-stats">
+                    <div><span class="number">128</span><div class="label">Suites de Luxe</div></div>
+                    <div><span class="number">4.9</span><div class="label">Note des Clients</div></div>
+                    <div><span class="number">12</span><div class="label">Prix Reçus</div></div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="badge">
+                    <span class="stars">★★★★★</span>
+                    <span class="text">Luxe 5 Étoiles <small>Noté n°1 dans la ville</small></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKING BAR -->
+        <div class="container">
+            <div class="booking-bar">
+                <div class="field">
+                    <label>Arrivée</label>
+                    <input type="date" value="2026-08-15" />
+                </div>
+                <div class="field">
+                    <label>Départ</label>
+                    <input type="date" value="2026-08-18" />
+                </div>
+                <div class="field">
+                    <label>Voyageurs</label>
+                    <select>
+                        <option>1 Adulte</option>
+                        <option selected>2 Adultes</option>
+                        <option>2 Adultes + 1 Enfant</option>
+                        <option>3 Adultes</option>
+                        <option>4 Adultes</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Chambre</label>
+                    <select>
+                        <option>Suite Deluxe</option>
+                        <option selected>King Exécutif</option>
+                        <option>Suite Familiale</option>
+                        <option>Penthouse Présidentiel</option>
+                    </select>
+                </div>
+                <button class="btn-book" onclick="showPage('contact')">Vérifier la Disponibilité</button>
+            </div>
+        </div>
+
+        <!-- CHAMBRES PREVIEW -->
+        <section class="container">
+            <h2 class="section-title">Nos Suites Signature</h2>
+            <p class="section-sub">Chaque chambre est conçue avec du mobilier choisi, du linge italien et des équipements sur mesure.</p>
+            <div class="room-grid">
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80" alt="Suite Deluxe" />
+                    <div class="body">
+                        <h3>Suite Deluxe</h3>
+                        <div class="price">$280 <small>/ nuit</small></div>
+                        <div class="features"><span>Lit King</span><span>Vue sur la ville</span><span>Salle de bain en marbre</span></div>
+                        <p style="color:#5a6a7a; font-size:0.95rem; margin:12px 0;">48 m² · minibar offert · machine à espresso</p>
+                        <a class="btn-outline" onclick="showPage('chambres')">Voir la chambre</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="King Exécutif" />
+                    <div class="body">
+                        <h3>King Exécutif</h3>
+                        <div class="price">$360 <small>/ nuit</small></div>
+                        <div class="features"><span>Lit King</span><span>Vue sur le jardin</span><span>Salon</span></div>
+                        <p style="color:#5a6a7a; font-size:0.95rem; margin:12px 0;">62 m² · terrasse privée · télévision connectée · peignoir</p>
+                        <a class="btn-outline" onclick="showPage('chambres')">Voir la chambre</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80" alt="Penthouse Présidentiel" />
+                    <div class="body">
+                        <h3>Penthouse Présidentiel</h3>
+                        <div class="price">$520 <small>/ nuit</small></div>
+                        <div class="features"><span>Super King</span><span>Panoramique</span><span>Service de Majordome</span></div>
+                        <p style="color:#5a6a7a; font-size:0.95rem; margin:12px 0;">120 m² · jacuzzi · ascenseur privé · champagne</p>
+                        <a class="btn-outline" onclick="showPage('chambres')">Voir la chambre</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="container">
+            <h2 class="section-title">Témoignages</h2>
+            <p class="section-sub">Des avis authentiques de clients qui ont fait de L'Astor leur maison loin de chez eux.</p>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Absolument parfait. Le service était impeccable, la chambre magnifique et l'emplacement idéal. Nous reviendrons."</p>
+                    <div class="author">— Sarah M. <small>Londres, Royaume-Uni</small></div>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"L'une des meilleures expériences hôtelières que j'aie jamais vécues. La vue du penthouse est inoubliable."</p>
+                    <div class="author">— David & Elena <small>New York, États-Unis</small></div>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Un véritable joyau 5 étoiles. Le spa était incroyable et le petit-déjeuner était de classe mondiale."</p>
+                    <div class="author">— Aisha K. <small>Dubaï, Émirats Arabes Unis</small></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+    PAGE: CHAMBRES
+    ============================================================ -->
+    <div id="page-chambres" class="page">
+        <section class="container" style="padding-top: 40px;">
+            <h2 class="section-title">Nos Chambres & Suites</h2>
+            <p class="section-sub">Le luxe redéfini. Chaque chambre est un sanctuaire de confort et d'élégance.</p>
+            <div class="room-grid">
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80" alt="Suite Deluxe" />
+                    <div class="body">
+                        <h3>Suite Deluxe</h3>
+                        <div class="price">$280 <small>/ nuit</small></div>
+                        <div class="features"><span>Lit King</span><span>Vue sur la ville</span><span>Salle de bain en marbre</span><span>Télévision connectée</span></div>
+                        <p style="color:#5a6a7a; font-size:0.95rem; margin:12px 0;">48 m² · minibar offert · machine à espresso · peignoir et chaussons</p>
+                        <a class="btn-outline" onclick="showPage('contact')">Réserver</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="King Exécutif" />
+                    <div class="body">
+                        <h3>King Exécutif</h3>
+                        <div class="price">$360 <small>/ nuit</small></div>
+                        <div class="features"><span>Lit King</span><span>Vue sur le jardin</span><span>Salon</span><span>Bureau</span></div>
+                        <p style="color:#5a6a7a; font-size:0.95rem; margin:12px 0;">62 m² · terrasse privée · télévision connectée · peignoir · service de couverture</p>
+                        <a class="btn-outline" onclick="showPage('contact')">Réserver</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80" alt="Penthouse Présidentiel" />
+                    <div class="body">
+                        <h3>Penthouse Présidentiel</h3>
+                        <div class="price">$520 <small>/ nuit</small></div>
+                        <div class="features"><span>Super King</span><span>Panoramique</span><span>Majordome</span><span>Jacuzzi</span></div>
+                        <p style="color:#5a6a7a; font-size:0.95rem; margin:12px 0;">120 m² · ascenseur privé · champagne · 2 salles de bain · salon</p>
+                        <a class="btn-outline" onclick="showPage('contact')">Réserver</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1584132967330-5af6816b8dd0?w=800&q=80" alt="Suite Familiale" />
+                    <div class="body">
+                        <h3>Suite Familiale</h3>
+                        <div class="price">$410 <small>/ nuit</small></div>
+                        <div class="features"><span>2 Lits Queen</span><span>Vue sur le parc</span><span>Familiale</span><span>2 Télévisions</span></div>
+                        <p style="color:#5a6a7a; font-size:0.95rem; margin:12px 0;">85 m² · chambres communicantes · équipements pour enfants · console de jeux</p>
+                        <a class="btn-outline" onclick="showPage('contact')">Réserver</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+    PAGE: SERVICES
+    ============================================================ -->
+    <div id="page-services" class="page">
+        <section class="container" style="padding-top: 40px;">
+            <h2 class="section-title">Services d'Exception</h2>
+            <p class="section-sub">Chaque détail est soigneusement curaté pour votre confort et votre plaisir.</p>
+
+            <div class="amenities-grid">
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=800&q=80" alt="Piscine à débordement" />
+                    <div class="body">
+                        <h3>Piscine à Débordement</h3>
+                        <p>Piscine chauffée de 25 mètres avec bar au bord de l'eau. Vue imprenable sur la ville.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" alt="Spa et bien-être" />
+                    <div class="body">
+                        <h3>Spa & Bien-être</h3>
+                        <p>Massages, sauna, hammam et soins exclusifs. Un sanctuaire de détente absolue.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="Centre de fitness" />
+                    <div class="body">
+                        <h3>Centre de Fitness</h3>
+                        <p>Espace de sport moderne ouvert 24h/24 avec coach personnel disponible sur demande.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Restauration étoilée" />
+                    <div class="body">
+                        <h3>Restauration Étoilée</h3>
+                        <p>Chef étoilé Michelin, menu dégustation, table du chef et accords mets et vins.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=800&q=80" alt="Parking voiturier" />
+                    <div class="body">
+                        <h3>Parking Voiturier</h3>
+                        <p>Service de voiturier offert, avec bornes de recharge pour véhicules électriques.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&q=80" alt="WiFi ultra-rapide" />
+                    <div class="body">
+                        <h3>WiFi Ultra-Rapide</h3>
+                        <p>Connexion 1 Gbps dans tout l'établissement. Idéal pour les voyageurs d'affaires.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1548196349-3beb2ca0f0b6?w=800&q=80" alt="Animaux acceptés" />
+                    <div class="body">
+                        <h3>Animaux Acceptés</h3>
+                        <p>Les chiens et les chats sont les bienvenus. Équipements spéciaux pour vos compagnons.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1545173168-4f1b9c35b51d?w=800&q=80" alt="Service de blanchisserie" />
+                    <div class="body">
+                        <h3>Blanchisserie</h3>
+                        <p>Service de nettoyage à sec et repassage le jour même pour votre confort.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1550330861-2d7da5af6729?w=800&q=80" alt="Bar sur le toit" />
+                    <div class="body">
+                        <h3>Bar sur le Toit</h3>
+                        <p>Vue panoramique sur la ville, cocktails signature et ambiance sophistiquée.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=800&q=80" alt="Club enfants" />
+                    <div class="body">
+                        <h3>Club Enfants</h3>
+                        <p>Activités ludiques et éducatives, baby-sitting disponible sur réservation.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&q=80" alt="Location de vélos" />
+                    <div class="body">
+                        <h3>Location de Vélos</h3>
+                        <p>Vélos électriques et classiques avec casques pour explorer la ville en toute liberté.</p>
+                    </div>
+                </div>
+
+                <div class="amenity-card">
+                    <img src="https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=800&q=80" alt="Boutique cadeaux" />
+                    <div class="body">
+                        <h3>Boutique Cadeaux</h3>
+                        <p>Souvenirs exclusifs, articles de luxe et produits locaux de qualité.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+    PAGE: GALERIE
+    ============================================================ -->
+    <div id="page-galerie" class="page">
+        <section class="container" style="padding-top: 40px;">
+            <h2 class="section-title">Galerie</h2>
+            <p class="section-sub">Un aperçu de l'élégance et de la beauté de L'Astor.</p>
+            <div class="gallery-grid">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Extérieur de l'hôtel" />
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="Hall d'entrée" />
+                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80" alt="Chambre" />
+                <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80" alt="Vue du penthouse" />
+                <img src="https://images.unsplash.com/photo-1584132967330-5af6816b8dd0?w=800&q=80" alt="Chambre familiale" />
+                <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800&q=80" alt="Spa" />
+                <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=800&q=80" alt="Piscine" />
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80" alt="Restaurant" />
+                <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80" alt="Bar" />
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Hall" />
+                <img src="https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=800&q=80" alt="Salle de bain" />
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80" alt="Vue depuis l'hôtel" />
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+    PAGE: CONTACT
+    ============================================================ -->
+    <div id="page-contact" class="page">
+        <section class="container" style="padding-top: 40px;">
+            <h2 class="section-title">Contactez-Nous</h2>
+            <p class="section-sub">Nous serions ravis de vous entendre. Contactez-nous pour toute réservation ou demande d'information.</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>L'Astor Hôtel</h3>
+                    <p>123 Avenue du Luxe</p>
+                    <p>Centre-ville, New York, NY 10001</p>
+                    <p style="margin-top:16px;"><span class="highlight">Téléphone :</span> +1 (555) 987-6543</p>
+                    <p><span class="highlight">Email :</span> sejour@lastor.com</p>
+                    <div class="detail">
+                        <p><strong>Arrivée :</strong> 15h00</p>
+                        <p><strong>Départ :</strong> 11h00</p>
+                        <p><strong>Réception :</strong> Disponible 24h/24 et 7j/7</p>
+                    </div>
+                    <div style="margin-top:24px; padding-top:24px; border-top:2px solid #c9a96e;">
+                        <p style="font-size:0.9rem; color:#5a6a7a;">Suivez-nous pour des offres exclusives</p>
+                        <div style="display:flex; gap:16px; margin-top:8px; font-size:0.95rem; color:#c9a96e;">
+                            <span>Facebook</span>
+                            <span>Twitter</span>
+                            <span>Instagram</span>
+                            <span>YouTube</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="contact-image" style="margin-bottom:24px;"></div>
+                    <div class="contact-form">
+                        <form action="https://formspree.io/f/xqkrgevp" method="POST">
+                            <input type="text" name="name" placeholder="Nom complet" required />
+                            <input type="email" name="email" placeholder="Adresse email" required />
+                            <input type="tel" name="phone" placeholder="Numéro de téléphone" />
+                            <input type="text" name="subject" placeholder="Sujet (ex: Réservation, Demande d'information)" />
+                            <textarea name="message" placeholder="Votre message..." required></textarea>
+                            <button type="submit" class="btn-primary" style="width:100%;">Envoyer le message</button>
+                        </form>
+                        <p style="font-size:0.85rem; color:#8a9aaa; margin-top:12px; text-align:center;">Nous répondons sous 24 heures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>L'Astor Hôtel</h4>
+                <p>123 Avenue du Luxe, Centre-ville</p>
+                <p>New York, NY 10001</p>
+                <p style="margin-top:12px; color:#c9a96e;">+1 (555) 987-6543</p>
+                <p>sejour@lastor.com</p>
+            </div>
+            <div>
+                <h4>Liens Rapides</h4>
+                <a onclick="showPage('chambres')">Chambres & Suites</a>
+                <a onclick="showPage('services')">Services</a>
+                <a onclick="showPage('galerie')">Galerie</a>
+                <a onclick="showPage('contact')">Contact</a>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <a onclick="showPage('contact')">FAQ</a>
+                <a onclick="showPage('contact')">Politique d'annulation</a>
+                <a onclick="showPage('contact')">Politique de confidentialité</a>
+                <a onclick="showPage('contact')">Carrières</a>
+            </div>
+            <div>
+                <h4>Restez Connectés</h4>
+                <p style="color:#b0c0d0;">Abonnez-vous pour des offres exclusives</p>
+                <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+                    <input type="email" placeholder="Votre email" />
+                    <button>S'abonner</button>
+                </div>
+                <div style="margin-top:20px; display:flex; gap:20px; font-size:1.1rem; color:#b0c0d0;">
+                    <a href="#" style="color:#b0c0d0; text-decoration:none;">Facebook</a>
+                    <a href="#" style="color:#b0c0d0; text-decoration:none;">Twitter</a>
+                    <a href="#" style="color:#b0c0d0; text-decoration:none;">Instagram</a>
+                    <a href="#" style="color:#b0c0d0; text-decoration:none;">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 L'Astor Hôtel · Une Collection d'Expériences de Luxe
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT: PAGE SWITCHER
+    ============================================================ -->
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(function(page) {
+                page.classList.remove('active');
+            });
+
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(function(link) {
+                link.classList.remove('active-link');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+            navLinks.forEach(function(link) {
+                const onclickAttr = link.getAttribute('onclick');
+                if (onclickAttr && onclickAttr.includes("'" + pageId + "'")) {
+                    link.classList.add('active-link');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
